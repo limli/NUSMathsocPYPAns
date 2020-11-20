@@ -1,0 +1,238 @@
+\documentclass{article}
+
+\usepackage{mathtools}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{bm}
+\usepackage{enumitem}
+\usepackage{textcomp}
+\usepackage{amsthm}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\usepackage[margin=1in]{geometry}
+\setlength\parindent{0pt}
+\setlength{\parskip}{5px}
+
+\newtheorem{lemma}{Lemma}
+
+\newcommand\at[2]{\left.#1\right|_{#2}}
+\newcommand{\p}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\pp}[2]{\frac{\partial^2 #1}{\partial #2^2}}
+\newcommand{\hes}[3]{\begin{pmatrix}
+\frac{\partial^2 #1}{\partial #2 \partial #2} & \frac{\partial^2 #1}{\partial #2 \partial #3} \\
+\frac{\partial^2 #1}{\partial #3 \partial #2} & \frac{\partial^2 #1}{\partial #3 \partial #3}
+\end{pmatrix}}
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\paren}[1]{\left(#1\right)}
+\newcommand{\brac}[1]{\left[#1\right]}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\half}{\frac{1}{2}}
+\newcommand{\st}{\text{ s.t. }}
+\newcommand{\vv}[2]{\begin{pmatrix}#1\\#2\end{pmatrix}}
+\newcommand{\vvv}[3]{\begin{pmatrix}#1\\#2\\#3\end{pmatrix}}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+\begin{document}
+
+\title{MA3236 AY1819 Sem 1 Answers}
+\author{Lim Li}
+\maketitle
+
+\subsection*{Question 1}
+\begin{enumerate}
+\item A
+\item D
+\item B
+\item B
+\item C
+\item B
+\end{enumerate}
+
+\subsection*{Question 2}
+
+\begin{enumerate}[label=(\roman*)]
+\item From $g_1(x)$, we know that $x_1^2 \leq 5$, so $-\sqrt{5} \leq x_1 \leq \sqrt{5}$. Similarly, we also know $-\sqrt{5} \leq x_2 \leq \sqrt{5}$. Hence, both $x_1$ and $x_2$ are bounded by closed sets.
+
+We also know that $f(x)$ is continuous. And since $g_1(x)$ and $g_2(x)$ are closed, hence, the feasible set is closed and bounded.
+
+Hence, the NLP will have an optimal solution.
+
+\item
+    \[\nabla g_1(x) = \vvv{2x_1}{2x_2}{0}\]
+    \[\nabla g_2(x) = \vvv{0}{3x_2}{-1}\]
+    For the regular condition to not hold, $\nabla g_1(x)$ and $\nabla g_2(x)$ need to be linearly dependent. Since the third coordinate of $g_2$ is $-1$ while for $g_1$ is 0, they cannot be a scalar multiple of each other. Hence, $g_1(x)=0$.  Then, $x_1=x_2=0$, which contradicts $g_1$. So no irregular points for this case.
+    
+    Hence, regularity condition hold at every feasible point.
+
+\item
+    \[\nabla f(x) = \vvv{2}{-1}{0}\]
+    There exist unique $\lambda_1,\lambda_2$ such that
+    \[\vvv{2}{-1}{0} + \lambda_1 \vvv{2x_1}{2x_2}{0} + \lambda_2 \vvv{0}{3x_2}{-1} = 0\]
+    By looking at the third coordinate, we can conclude that $\lambda_2=0$.
+    
+    Hence, $x_1=-2x_2$.
+    
+    Substitute this into $g_1(x)$:
+    \[(-2x_2)^2+x_2^2-5=5x_2-5=0\]
+    \[\therefore x_2=\pm 1\]
+    
+    Hence, the KKT points are $(-2,1,1)$ and $(2,-1,-1)$.
+\item
+    \[f((-2,1,1)) = -5\]
+    \[f((2,-1,-1)) = 5\]
+    
+    Min is $-5$.
+\end{enumerate}
+
+\subsection*{Question 3}
+
+\begin{enumerate}[label=(\roman*)]
+\item
+    \[\nabla f(x) = 2\Sigma x\]
+    \[\nabla g(x) = \vvv{1}{\vdots}{1}\]
+    \[\nabla h(x) = -v\]
+    If $x^*$ is a local min, then, if $-v^Tx+a=0$, then there exist unique $\lambda,\mu$ such that $\mu>0$ and
+    \[2\Sigma x^* + \lambda \vvv{1}{\vdots}{1} - \mu v = 0\]
+    else if $-v^Tx+a \neq 0$, then there exist unique $\lambda$ such that
+    \[2\Sigma x^* + \lambda \vvv{1}{\vdots}{1} = 0\]
+\item
+    \begin{align*}
+    L(x,\lambda,\mu) &= f(x) + \lambda (g(x)-1) + \mu h(x) \\
+        &= x^T \Sigma x + \lambda (\sum_{i=1}^n x_i-1) + \mu (-v^T x + a)
+    \end{align*}
+    \[
+    \theta(\lambda,\mu) = \inf\{x^T \Sigma x + \lambda (\sum_{i=1}^n x_i - 1) + \mu (-v^T x + a)\}
+    \]
+\item
+    \begin{align*}
+    f(x) &= x^T \begin{pmatrix}
+        2 & 1 \\ 1 & 2
+        \end{pmatrix} x \\
+        &= 2x_1^2 + 2x_1x_2 + 2x_2^2
+    \end{align*}
+    \[g(x) = x_1 + x_2 = 1\]
+    \[h(x) = -2x_1 - x_2 + 3 \leq 0\]
+    Since $x_1+x_2=1$, we substitute $x_2 = 1 - x_1$ into $f$ and $h$.
+    \begin{align*}
+    f((x_1,1-x_2)) &= 2x_1^2 + 2x_1(1-x_1) + 2(1-x_1)^2 \\
+        &= 2x_1^2 - 2x_1 + 2
+    \end{align*}
+    \begin{align*}
+    h((x_1,1-x_2)) &= -2x_1 - (1-x_1) + 3 \\
+        &= 2 - x_1 \leq 0
+    \end{align*}
+    Hence, we want to minimize $2x_1^2 - 2x_1 + 2$ subject to $x_1 \geq 2$. Since $2x_1^2 - 2x_1 + 2$ is a quadratic with min at $x_1=0.5$, hence, with the constraint, the problem minimizes at $x_1 = 2$.
+    
+    The solution to the problem is $(2,-1)$, and $f((2,-1)) = 6$.
+\item
+    \[
+    \theta(\lambda,\mu) = \inf\{2x_1^2 + 2x_1x_2 + 2x_2^2 + \lambda (x_1+x_2-1) + \mu (-2x_1 - x_2 + 3)\}
+    \]
+    Let $t(x) = 2x_1^2 + 2x_1x_2 + 2x_2^2 + \lambda (x_1+x_2-1) + \mu (-2x_1 - x_2 + 3)$, which is clearly convex.
+    \[
+    \nabla t(x) = \vv{4x_1+2x_2+\lambda-2\mu}{2x_1+4x_2+\lambda-\mu}
+    \]
+    We solve for $\nabla t(x)=0$,
+    \[4x_1+2x_2+\lambda-2\mu=0 \hspace{1cm} 2x_1+4x_2+\lambda-\mu=0\]
+    \[x_1 = \frac{3\mu - \lambda}{6} \hspace{1cm} x_2 = \frac{-\lambda}{6}\]
+    Hence, we can substitute these values into $\theta(\lambda,\mu)$
+    \begin{align*}
+    \theta(\lambda,\mu) &= 2(\frac{3\mu - \lambda}{6})^2 + 2(\frac{3\mu - \lambda}{6})(\frac{-\lambda}{6}) + 2(\frac{-\lambda}{6})^2 + \lambda ((\frac{3\mu - \lambda}{6})+(\frac{-\lambda}{6})-1) + \mu (-2(\frac{3\mu - \lambda}{6}) - (\frac{-\lambda}{6}) + 3) \\
+        &= -\frac{\lambda^2}{6} + \frac{\lambda \mu}{2} - \lambda - \frac{\mu^2}{2} + 3\mu \\
+        &= \frac{1}{6}(-\lambda^2 + 3\lambda\mu - 6\lambda - 3\mu^2 + 18\mu)
+    \end{align*}
+    Which is concave. To find the max, we differentiate and find the stationary point
+    \[\nabla \theta(\lambda,\mu) = \frac{1}{6} \vv{-2\lambda + 3\mu - 6}{3\lambda - 6\mu + 18}=0\]
+    Hence, $\lambda=6, \mu=6$, which also satisfies $\mu \geq 0$ condition.
+    
+    Sub back into $\theta(6, 6) = 6$, which is consistent with part (iii).
+\end{enumerate}
+
+\subsection*{Question 4}
+
+\begin{enumerate}[label=(\roman*)]
+\item
+    \[f(x^0) = 2\]
+    \[\nabla f(x) = \vv{2x_1}{4x_2^3}\]
+    \[\nabla f(x^0) = \vv{2}{4}\]
+    Linear problem $LP_1$ for $x^1$:
+    \begin{align*}
+    \min \quad & z(x) = 2 + \vv{2}{4}^Tx \\
+    s.t. \quad & h_1(x) \leq 0 \\
+    & h_2(x) \leq 0 \\
+    & h_3(x) \leq 0
+    \end{align*}
+\item
+    \[L(x,\mu) = 2 + \vv{2}{4}^Tx + \mu_1 h_1(x) + \mu_2 h_2(x) + \mu_3 h_3(x)\]
+    \[\theta(\mu) = \inf_{x} \{L(x,\mu)\}\]
+    Dual problem:
+    \begin{align*}
+    \max \quad & \theta(\mu) \\
+    s.t. \quad & \mu \in \R_+^3
+    \end{align*}
+\end{enumerate}
+
+\subsection*{Question 5}
+
+\begin{enumerate}[label=(\roman*)]
+\item To prove that $g(y)$ is convex, we want to show
+    \[\lambda g(a) + (1-\lambda)g(b) \geq g(\lambda a + (1-\lambda)b))\]
+    %\[\iff \lambda \sup \{a^T x - f(x)\} + (1-\lambda) \sup \{b^T x - f(x)\} \geq \sup \{(\lambda a + (1-\lambda b))^T x - f(x)\}\]
+    Note that $\sup f_1(x) + \sup f_2(x) \geq \sup \{f_1(x) + f_2(x)\}$. Hence,
+    \begin{align*}
+    \lambda g(a) + (1-\lambda)g(b) &=
+    \lambda \sup \{a^T x - f(x)\} + (1-\lambda) \sup \{b^T x - f(x)\} \\
+        &= \sup \{\lambda a^T x - \lambda f(x)\} + \sup \{(1-\lambda)b^T x - (1-\lambda)f(x)\} \\
+        &\geq \sup \{\lambda a^T x - \lambda f(x) + (1-\lambda)b^T x - (1-\lambda)f(x)\} \\
+        &= \sup\{(\lambda a + (1-\lambda)b)^T x - f(x) \} \\
+        &= g(\lambda a + (1-\lambda)b))
+    \end{align*}
+    Hence, $g(x)$ is convex.
+\item
+    We want to prove that $f(x) = \sup_{y\in \R^n}\{ y^T x - g(y)\}$.
+    
+    \textbf{The $\geq$ direction:}
+    
+    We are given that
+    \[\forall y \in \R^n, g(y) = \sup_{x \in \R^n} y^T x - f(x)\]
+    By $\sup$ property,
+    \[\therefore \forall x,y \in \R^n, g(y) \geq y^T x - f(x)\]
+    And by rearranging,
+    \[\therefore \forall x,y \in \R^n, f(x) \geq y^T x - g(y)\]
+    Hence, by $\sup$ property,
+    \[\therefore \forall x \in \R^n, f(x) \geq \sup_{y\in \R^n}\{ y^T x - g(y)\}\]
+    \textbf{The $\leq$ direction:}
+    
+    Let $x_0$ be any arbitrarily fixed $x$. Since $f$ is convex, we know there exist a plane touching $f$ at $x_0$ that is always below $f$. In other words, there exist a $y_0 \in \R^n, c \in \R$ such that
+    \[\forall x \in \R^n, f(x) \geq y_0^T x + c \hspace{1cm} f(x_0) = y_0^T x_0 + c\]
+    To find $g(y_0)$:
+    \begin{align*}
+    g(y_0) &= \sup_{x \in \R^n} y_0^T x - f(x) \\
+        &\geq y_0^T x_0 - f(x_0) & \text{by substituting $x_0$}\\
+        &= -c
+    \end{align*}
+    \begin{align*}
+    g(y_0) &= \sup_{x \in \R^n} y_0^T x - f(x) \\
+        &\leq \sup_{x \in \R^n} y_0^T x - (y_0^T x + c) & \text{since }f(x) \geq y_0^T x + c\\
+        &= -c
+    \end{align*}
+    \[\therefore g(y_0) = -c\]
+    Now, we substitute $y_0$ into $\sup_{y\in \R^n}\{ y^T x_0 - g(y)\}$:
+    \begin{align*}
+    \sup_{y\in \R^n}\{ y^T x_0 - g(y)\} &\geq y_0^Tx_0 - g(y_0) \\
+        &= y_0^T x_0 + c \\
+        &= f(x_0)
+    \end{align*}
+    Hence,
+    \[f(x_0) \leq \sup_{y\in \R^n}\{ y^T x_0 - g(y)\}\]
+    And since $x_0$ was arbitrarily chosen,
+    \[\therefore f(x) \leq \sup_{y\in \R^n}\{ y^T x - g(y)\} \]
+\end{enumerate}
+
+
+
+\end{document}
