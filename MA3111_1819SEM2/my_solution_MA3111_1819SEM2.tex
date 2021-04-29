@@ -113,19 +113,17 @@ Now, we need to find each residue.
     &= -\frac{e}{\pi}
 \end{align*}
 And to find the residue at $z=0$, we find the laurent series.
-
-Note that the laurent series of $\frac{1}{\sin \pi z}$ is $\frac{1}{\pi z} + \sum_{n=1} a_n z^n$, and the laurent series of $e^z$ is $1 + x + \frac{x^2}{2} + \cdots$.
 \begin{align*}
-f(z) &= \frac{e^z}{z^2 \sin(\pi z)} \\
-    &= \frac{1 + x + \frac{x^2}{2} + \cdots}{z^2} \paren{\frac{1}{\pi z} + \sum_{n=1} a_n z^n} \\
-    &= (\cdots) + (\cdots)\frac{1}{z} + (\cdots)\frac{1}{z^2} + (\frac{1}{\pi})\frac{1}{z^3}
+\frac{e^z}{z^2 \sin(\pi z)} &= \frac{1 + z + \frac{z^2}{2} + \frac{z^3}{3!} + \cdots}{z^2((\pi z) - \frac{(\pi z)^3}{3!} + \frac{(\pi z)^5}{5!} - \cdots)} \\
+    &= \frac{1}{z^3}\paren{\frac{1 + z + \frac{z^2}{2} + \frac{z^3}{3!} + \cdots}{(\pi) - \frac{\pi^3 z^2}{3!} + \frac{\pi^5 z^4}{5!} - \cdots}} \\
+    &= \frac{1}{z^3} \paren{\frac{1}{\pi} + \frac{1}{\pi}z + (\frac{1}{2\pi} + \frac{\pi}{6})z^2 + \cdots}
 \end{align*}
-\[\therefore \Res_{z=0} f(z) = \frac{1}{\pi}\]
+\[\therefore \Res_{z=0} = \frac{1}{2\pi} + \frac{\pi}{6}\]
 Hence,
 \begin{align*}
 \int_\gamma f(z)\ dz &= 2\pi i (\Res_{z=-1}(z) + \Res_{z=0}(z) + \Res_{z=1}(z)) \\
-    &= 2\pi i\paren{-\frac{1}{e\pi} - \frac{e}{\pi} + \frac{1}{\pi}} \\
-    &= \paren{-\frac{2}{e} - 2e + 2}i
+    &= 2\pi i\paren{-\frac{1}{e\pi} - \frac{e}{\pi} + \frac{1}{2\pi} + \frac{\pi}{6}} \\
+    &= \paren{-\frac{2}{e} - 2e + 1 + \frac{\pi^2}{3}}i
 \end{align*}
 \end{enumerate}
 \item WLOG, assume $a>0$. For $a<0$, the answer would be the negation.
